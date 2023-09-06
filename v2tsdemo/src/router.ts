@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import type { RouteConfig } from 'vue-router';
 import { kebabCase } from "lodash";
 
 function routePages() {
-    const result = [
+    const result: Array<RouteConfig> = [
         {
             path: '/',
             component: () => import("./pages/IndexPage.vue"),
@@ -13,7 +14,7 @@ function routePages() {
     for (const p of Object.keys(pages)) {
         const m = p.match(/.\/pages\/(.*)Page\.vue/);
         if (m) {
-            const n = m.at(1)
+            const n = m[1]
                 .split('/')
                 .map(i => kebabCase(i))
                 .join('/');
