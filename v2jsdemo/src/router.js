@@ -30,7 +30,7 @@ function routePages() {
 
 Vue.use(VueRouter);
 
-const routes = routePages();
+export const routes = routePages();
 
 const router = new VueRouter({
   mode: 'history',
