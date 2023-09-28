@@ -1,5 +1,5 @@
 <template>
-    <div class="aes-page">
+    <div class="file-md5-page">
         <input type="file" @input="onLoadFile" />
         <div>size: {{ fileSize }}</div>
         <div>buffer size: {{ bufferSize }}</div>
