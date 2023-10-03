@@ -7,6 +7,7 @@ function routePages() {
     const result: Array<RouteConfig> = [
         {
             path: '/',
+            // @ts-ignore
             component: () => import("./pages/IndexPage.vue"),
         }
     ];
@@ -31,7 +32,7 @@ function routePages() {
 
 Vue.use(VueRouter);
 
-const routes = routePages();
+export const routes = routePages();
 
 const router = new VueRouter({
   mode: 'history',
