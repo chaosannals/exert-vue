@@ -1,0 +1,10 @@
+# 自定义语法
+
+def a = 1234.56;
+
+def func(a, b):
+    print("call func");
+    return a + a / b;
+
+func(a, 4);
+

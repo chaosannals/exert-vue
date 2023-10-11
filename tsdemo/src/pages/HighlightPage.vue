@@ -4,6 +4,7 @@
         <pre class="code-block"><code><span v-html="data.jsCode"></span></code></pre>
         <pre class="code-block"><code><span v-html="data.cppCode"></span></code></pre>
         <pre class="code-block"><code><span v-html="data.markdownCode"></span></code></pre>
+        <pre class="code-block"><code><span v-html="data.myCode"></span></code></pre>
     </div>
 </template>
 
@@ -15,6 +16,7 @@ const data = reactive({
     jsCode: "",
     cppCode: "",
     markdownCode: "",
+    myCode: "",
 });
 
 const readText = async (url: string) => {
@@ -26,9 +28,11 @@ onBeforeMount(async () => {
     const jsCode = await readText("/code/hello_world.js");
     const cppCode = await readText("/code/hello_world.cpp");
     const markdownCode = await readText("/code/hello_world.md");
+    const myCode = await readText("/code/hello_world.my");
     data.jsCode = hljs.highlightAuto(jsCode).value;
     data.cppCode = hljs.highlightAuto(cppCode).value;
     data.markdownCode = hljs.highlightAuto(markdownCode).value;
+    data.myCode = hljs.highlight(myCode, { language: 'mylang' }).value;
 });
 
 </script>
