@@ -11,13 +11,24 @@ hljs.registerLanguage('mylang', (api: HLJSApi) => {
     console.log(api.listLanguages());
     return {
         case_insensitive: true,
-        keywords: 'def return',
+        keywords: {
+            $pattern: /[-a-z]+/, // 关键字模式，原本只匹配\w+
+            keyword: 'def return',
+            literal: ['false', 'true', 'null'],
+        },
         contains: [
+            // 字符串
             {
                 scope: 'string',
                 begin: '"',
                 end: '"'
             },
+            {
+                scope: 'number',
+                begin: /\d+/,
+                end: /\.\d+/,
+            },
+            // 单行注释
             api.COMMENT('#', '\n')
         ]
     }
