@@ -7,6 +7,7 @@ echo 'hello '.$a.PHP_EOL;
 ```
 
 ```js
+// 中文
 console.log('hello');
 ```
 
