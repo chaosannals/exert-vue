@@ -3,6 +3,9 @@
         <div v-for="link in links" @click="onClickLink(link)">
             <span>{{ link }}</span>
         </div>
+        <div v-for="sf in files">
+            <span>{{ sf }}</span>
+        </div>
     </div>
 </template>
 
@@ -22,5 +25,7 @@ const $router = useRouter();
 const onClickLink = (link) => {
     $router.push(link);
 };
+
+const files = computed(() => __STATIC_FILES__);
 
 </script>
