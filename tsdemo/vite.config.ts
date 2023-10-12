@@ -31,4 +31,26 @@ export default defineConfig({
   define: {
     __STATIC_FILES__: globDir(publicDir), // 预设的全局变量需要在 vite-env.d.ts 里面声明类型
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // 简单指定模块拆分。
+        // manualChunks: {
+        //   lodash: ['lodash'], // 74.48k
+        //   'crypto-js': ['crypto-js'], // 这个很小 5k 没啥意义。
+        //   marked: ['marked'], // 35.97k
+        //   'highlight.js': ['highlight.js'], // 913.25k 好大，而且这个包没有依赖其他包，没办法再拆。
+        // },
+
+        // 通过函数拆分。node_modules 都被合并到块 vendor 里
+        // manualChunks(id, {getModuleInfo, getModuleIds}) {
+        //   if (id.includes('node_modules')) {
+        //     return 'vendor';
+        //   }
+        // },
+
+        // 默认的分包策略是吧依赖弄到 index 里面。
+      }
+    }
+  }
 });
