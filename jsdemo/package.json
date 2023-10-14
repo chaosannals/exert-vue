@@ -4,9 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "npm run build:pbjs && vite build",
-    "build:pbjs": "pbjs ./src/protos/awesome.proto --out ./src/protos/awesome.json",
+    "dev": "npm run build:pb && vite",
+    "build": "npm run build:pb && vite build",
+    "build:pbjson": "pbjs ./src/protos/awesome.proto --out ./src/protos/awesome.json",
+    "build:pbjs": "pbjs -o ./src/protos/say.js -t static-module -w es6 ./src/protos/say.proto",
+    "build:pb": "npm run build:pbjs && npm run build:pbjson",
     "preview": "vite preview"
   },
   "dependencies": {

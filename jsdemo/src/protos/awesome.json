@@ -3,10 +3,24 @@
     "awesomepackage": {
       "nested": {
         "AwesomeMessage": {
+          "oneofs": {
+            "_awesomeNumber": {
+              "oneof": [
+                "awesomeNumber"
+              ]
+            }
+          },
           "fields": {
             "awesomeField": {
               "type": "string",
               "id": 1
+            },
+            "awesomeNumber": {
+              "type": "int32",
+              "id": 2,
+              "options": {
+                "proto3_optional": true
+              }
             }
           }
         }

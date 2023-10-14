@@ -1,4 +1,6 @@
 package awesomepackage;
+// 加了 package 这个反而麻烦，这是给老式 JS 做命名空间的，新的 ES6 有模块化，这样搞会多出一层，很麻烦。
+// 此示例给 JSON 使用，所以保留了这种方式。
 syntax = "proto3";
 
 message AwesomeMessage {
