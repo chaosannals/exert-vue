@@ -4,11 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "build:pbjs": "pbjs ./src/protos/awesome.proto --out ./src/protos/awesome.json",
-    "build:pbts": "pbts ./public/awesome.proto",
-    "preview": "vite preview"
+    "dev": "npm run build:pb && vite",
+    "build": "npm run build:pb && vue-tsc && vite build",
+    "build:pbjson": "pbjs ./src/protos/awesome.proto --out ./src/protos/awesome.json",
+    "build:pbjs": "pbjs -o ./src/protos/awesome.js -t static-module -w es6 ./src/protos/awesome.proto",
+    "build:pbts": "pbts -o ./src/protos/awesome.d.ts ./src/protos/awesome.js",
+    "build:pb": "npm run build:pbjs && npm run build:pbts",
+    "preview": "npm run build:pb && vite preview"
   },
   "dependencies": {
     "crypto-js": "^4.1.1",
