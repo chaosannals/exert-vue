@@ -5,16 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run build:pbjs && vite build",
+    "build:pbjs": "pbjs ./src/protos/awesome.proto --out ./src/protos/awesome.json",
     "preview": "vite preview"
   },
   "dependencies": {
     "lodash": "^4.17.21",
+    "protobufjs": "^7.2.5",
     "vue": "^3.2.47",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
+    "protobufjs-cli": "^1.1.2",
+    "sass": "^1.69.3",
     "vite": "^4.3.2"
   }
 }
