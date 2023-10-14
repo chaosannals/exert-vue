@@ -1,0 +1,24 @@
+{
+  "nested": {
+    "SayJsDemoRequest": {
+      "fields": {
+        "content": {
+          "type": "string",
+          "id": 1
+        }
+      }
+    },
+    "SayJsDemoReply": {
+      "fields": {
+        "code": {
+          "type": "int32",
+          "id": 1
+        },
+        "tip": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+syntax="proto3";
+
+message SayJsDemoRequest {
+    string content = 1;
+}
+
+message SayJsDemoReply {
+    int32 code = 1;
+    string tip = 2;
+}
