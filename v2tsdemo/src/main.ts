@@ -2,7 +2,9 @@ import Vue from "vue";
 import VueRx from 'vue-rx'; // 封装好差的库。
 import App from "./App.vue";
 import router from "./router";
-import { Observable } from 'rxjs'
+import { Observable } from 'rxjs';
+
+import "normalize.css";
 
 Vue.config.productionTip = false;
 Vue.use(VueRx); // 封装好差的库。
