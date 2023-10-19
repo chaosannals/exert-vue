@@ -20,6 +20,7 @@
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "pdfjs-dist": "^3.10.111",
+    "sha512crypt-node": "^1.0.2",
     "vue": "^2.7.14",
     "vue-router": "^3.6.5"
   }
