@@ -9,6 +9,7 @@ import { toArray } from 'rxjs/operators';
 import { HeroById } from './interfaces/hero-by-id.interface';
 import { Hero } from './interfaces/hero.interface';
 
+// 这个声明要和 proto 里面的一致。
 interface HeroService {
   findOne(data: HeroById): Observable<Hero>;
   findMany(upstream: Observable<HeroById>): Observable<Hero>;
