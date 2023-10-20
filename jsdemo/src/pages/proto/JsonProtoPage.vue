@@ -13,7 +13,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { onBeforeMount, reactive } from 'vue';
 import jsonProto from '../../protos/awesome.json';
 import protobuf from 'protobufjs';

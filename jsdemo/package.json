@@ -8,10 +8,12 @@
     "build": "npm run build:pb && vite build",
     "build:pbjson": "pbjs ./src/protos/awesome.proto --out ./src/protos/awesome.json",
     "build:pbjs": "pbjs -o ./src/protos/say.js -t static-module -w es6 ./src/protos/say.proto",
-    "build:pb": "npm run build:pbjs && npm run build:pbjson",
+    "build:pb": "npm run build:pbjs && npm run build:pbjson && npm run build:pbnest",
+    "build:pbnest": "pbjs -o ./src/protos/hero.js -t static-module -w es6 ../nestdemo/src/hero/hero.proto",
     "preview": "vite preview"
   },
   "dependencies": {
+    "grpc": "^1.24.11",
     "lodash": "^4.17.21",
     "protobufjs": "^7.2.5",
     "vue": "^3.2.47",
