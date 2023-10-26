@@ -12,8 +12,8 @@
         <button>AAAAA</button>
         <button ref="button" aria-describedby="tooltip" @click="onClick">I'm a button</button>
         <div ref="tooltip" role="tooltip" :class="tipClass">
-            <span>I'm a tooltip</span>
-            <div v-if="data.visible" class="arrow" data-popper-arrow></div>
+            <p>I'm a tooltip</p>
+            <p>I'm a tooltip</p>
         </div>
 
         <button>AAAAA</button>
@@ -89,7 +89,7 @@ onMounted(() => {
                 },
             },
         ],
-        placement: 'right',
+        placement: 'top',
     });
     console.log('popuper', popuper);
     document.addEventListener('mousedown', onMouseDown);
@@ -120,45 +120,36 @@ onBeforeUnmount(() => {
         /* display: block; */
     }
 
-    &[data-popper-placement^='top']>.arrow::before {
+    &::before {
+        position: absolute;
+        content: '';
+        width: 8px;
+        height: 8px;
+        background-color: #333;
+    }
+
+    &[data-popper-placement^='top']::before {
         bottom: -4px;
+        left: 50%;
+        transform: translate(-50%, 0) rotate(45deg);
     }
 
-    &[data-popper-placement^='bottom']>.arrow::before {
+    &[data-popper-placement^='bottom']::before {
         top: -4px;
+        left: 50%;
+        transform: translate(-50%, 0) rotate(45deg);
     }
 
-    &[data-popper-placement^='left']>.arrow::before {
+    &[data-popper-placement^='left']::before {
         right: -4px;
+        top: 50%;
+        transform: translate(0, -50%) rotate(45deg);
     }
 
-    &[data-popper-placement^='right']>.arrow::before {
+    &[data-popper-placement^='right']::before {
         left: -4px;
-        transform: translate(0, 50%), rotate(45deg);
+        top: 50%;
+        transform: translate(0, -50%) rotate(45deg);
     }
-}
-
-.arrow,
-.arrow::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: inherit;
-}
-
-.arrow {
-    visibility: hidden;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.arrow::before {
-    visibility: visible;
-    content: '';
-    transform: rotate(45deg);
 }
 </style>
