@@ -13,6 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "grpc": "^1.24.11",
     "lodash": "^4.17.21",
     "protobufjs": "^7.2.5",
