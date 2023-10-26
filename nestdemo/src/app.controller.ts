@@ -1,10 +1,15 @@
 import { Controller, Request, Get, Post, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { LocalAuthGuard } from './auth/local-auth.guard';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly authService: AuthService
+  ) { }
 
   @Get()
   getHello(): string {
@@ -14,6 +19,12 @@ export class AppController {
   @UseGuards(LocalAuthGuard) // local 要和 local.strategy.ts 对应
   @Post('auth/login')
   async login(@Request() req) {
+    return this.authService.login(req.user);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('profile')
+  getProfile(@Request() req) {
     return req.user;
   }
 }

@@ -28,15 +28,25 @@ nest g s cat /api/animal
 ## 登录
 
 ```bash
-# 登录请求
 # Linux 下字符串转义和 Windows 有区别
+
+# 登录请求
+# 返回结果里有 jwt token： {"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTY5ODI5ODMyMywiZXhwIjoxNjk4Mjk4MzgzfQ.2QpJ0P8YDdhA9pUFTTB_mgDjVzbOhmlq73f09XGqR_U"}
 curl -X POST http://localhost:3001/auth/login -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json"
+
+
+# 调用需要 jwt 验证的接口时带上头
+curl http://localhost:3001/profile -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTY5ODI5ODMyMywiZXhwIjoxNjk4Mjk4MzgzfQ.2QpJ0P8YDdhA9pUFTTB_mgDjVzbOhmlq73f09XGqR_U"
 ```
 
 ```bat
-@rem 登录请求
 @rem Windows 下字符串转义和 linux 有区别
+
+@rem 登录请求
 curl -X POST "http://localhost:3001/auth/login" -d "{\"username\": \"john\", \"password\": \"changeme\"}" -H "Content-Type: application/json"
+
+@rem 调用需要 jwt 验证的接口时带上头
+curl "http://localhost:3001/profile" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTY5ODI5ODMyMywiZXhwIjoxNjk4Mjk4MzgzfQ.2QpJ0P8YDdhA9pUFTTB_mgDjVzbOhmlq73f09XGqR_U"
 ```
 
 ## GRPC
