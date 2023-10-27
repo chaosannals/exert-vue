@@ -4,6 +4,9 @@
 </template>
 
 <script setup>
+/**
+ * floating-ui 是原本 popper.js 而来。
+ */
 import { ref } from 'vue';
 import {
     useFloating,
