@@ -9,6 +9,9 @@ export class Photo {
     @Column()
     url: string;
 
+    @Column({ type: 'datetime', nullable: true, })
+    createAt: string;
+
     @ManyToOne(type => User, user => user.photos)
     user: User;
 }

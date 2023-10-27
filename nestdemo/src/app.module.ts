@@ -16,6 +16,7 @@ const defaultOptions: TypeOrmModuleOptions = {
   username: 'root',
   password: '123456',
   database: 'demo',
+  // logging: true, // 打印 SQL
   autoLoadEntities: true, // 配合模块的 forFeature 自动加载实体
   synchronize: true, // 此项会自动修改数据库结构，生产环境应该关掉，不然会丢失线上数据。
 };

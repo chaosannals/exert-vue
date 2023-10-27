@@ -12,8 +12,11 @@ export class User {
   @Column()
   lastName: string;
 
-  @Column({ default: true })
+  @Column({ default: true})
   isActive: boolean;
+
+  @Column({type: 'date', nullable: true,})
+  createAt: string;
 
   @OneToMany((type) => Photo, (photo) => photo.user)
   photos: Photo[];
