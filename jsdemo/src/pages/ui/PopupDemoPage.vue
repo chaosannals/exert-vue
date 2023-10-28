@@ -20,6 +20,76 @@
         <button>AAAAA</button>
         <button>AAAAA</button>
         <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
+        <button>AAAAA</button>
     </div>
 </template>
 
@@ -43,7 +113,9 @@ const findSelf = (node) => {
 
 const button = ref();
 const tooltip = ref();
+const popuper = ref(null);
 
+const placements = ['top', 'left', 'right', 'bottom'];
 const data = reactive({
     visible: false,
 });
@@ -61,6 +133,10 @@ const onClick = () => {
         // data.visible = !data.visible;
         data.visible = true;
     }
+    const index = (placements.indexOf(popuper.value.state.placement) + 1) % placements.length;
+    console.log('onClick', index, placements[index], popuper.value.state.placement);
+    popuper.value.setOptions({ placement: placements[index] });
+    popuper.value.forceUpdate();
 };
 
 const onMouseDown = (e) => {
@@ -73,7 +149,7 @@ const onMouseDown = (e) => {
 onMounted(() => {
     console.log('mounted', button.value, tooltip.value);
     document.body.appendChild(tooltip.value);
-    const popuper = createPopper(button.value, tooltip.value, {
+    popuper.value = createPopper(button.value, tooltip.value, {
         modifiers: [
             preventOverflow, flip,
             {
@@ -91,12 +167,8 @@ onMounted(() => {
         ],
         placement: 'top',
     });
-    console.log('popuper', popuper);
+    console.log('popuper', popuper.value);
     document.addEventListener('mousedown', onMouseDown);
-
-    // setTimeout(() => {
-    //     popuper.update();
-    // }, 1000);
 });
 
 onBeforeUnmount(() => {
