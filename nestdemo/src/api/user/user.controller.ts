@@ -37,7 +37,7 @@ export class UserController {
         for (let i = 0; i < count; ++i) {
             const photo = new Photo();
             const userId = userIds[random(0, userIds.length - 1, false)];
-            photo.user = userMap.get(userId); 
+            photo.user = Promise.resolve(userMap.get(userId)); 
             photo.url = faker.internet.url();
             photos.push(photo);
         }

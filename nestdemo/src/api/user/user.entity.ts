@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn, VersionColumn, Generated } from 'typeorm';
 import { Photo } from './photo.entity';
+import { Record } from './record.entity';
 
 @Entity()
 export class User {
@@ -18,19 +19,11 @@ export class User {
   @Column({ type: 'datetime', nullable: true, })
   birthdate: string;
 
-  @Column()
-  @Generated("uuid")
-  uuid: string;
+  // 嵌入实体
+  // {prefix: false} 不然会把 record 加入在字段名前面。
+  @Column(type => Record, {prefix: false})
+  record: Record;
 
-  @CreateDateColumn()
-  createAt: string;
-
-  @UpdateDateColumn()
-  updateAt: string;
-
-  @VersionColumn()
-  version: number;
-
-  @OneToMany((type) => Photo, (photo) => photo.user)
-  photos: Photo[];
+  @OneToMany((type) => Photo, (photo) => photo.user, {createForeignKeyConstraints: false})
+  photos: Promise<Photo[]>; // Promise 时，关联数据时惰性 Lazy 的。
 }

@@ -12,6 +12,6 @@ export class Photo {
     @CreateDateColumn()
     createAt: string;
 
-    @ManyToOne(type => User, user => user.photos)
-    user: User;
+    @ManyToOne(type => User, user => user.photos, {createForeignKeyConstraints: false})
+    user: Promise<User>;
 }

@@ -8,6 +8,11 @@ import { SiteModule } from './site/site.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { UserModule } from './api/user/user.module';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+
+class MySnakeNamingStrategy extends SnakeNamingStrategy {
+
+}
 
 const defaultOptions: TypeOrmModuleOptions = {
   type: 'mysql',
@@ -19,6 +24,7 @@ const defaultOptions: TypeOrmModuleOptions = {
   logging: true, // 打印 SQL
   autoLoadEntities: true, // 配合模块的 forFeature 自动加载实体
   synchronize: true, // 此项会自动修改数据库结构，生产环境应该关掉，不然会丢失线上数据。
+  namingStrategy: new MySnakeNamingStrategy(),
 };
 
 @Dependencies(DataSource)
