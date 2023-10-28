@@ -46,9 +46,20 @@ const defaultOptions: TypeOrmModuleOptions = {
     AnimalModule,
     AuthModule,
     SiteModule,
+    // Mysql
     TypeOrmModule.forRoot({
       ...defaultOptions,
-      database: 'demo'
+      database: 'demo',
+      // name: "mysql-1", // 默认的不要命名，不然会导致获取不到报错。（多数据库）
+    }),
+    // Sqlite
+    TypeOrmModule.forRoot({
+      name: 'sqlite-1', // 命名，关联 注册 实体 时用作关联。（多数据库）
+      type: 'sqlite',
+      database: 'demo.db',
+      autoLoadEntities: true,  // 配合模块的 forFeature 自动加载实体
+      synchronize: true, // 此项会自动修改数据库结构，生产环境应该关掉，不然会丢失线上数据。
+      namingStrategy: new MySnakeNamingStrategy("nd_"),
     }),
     UserModule,
   ],

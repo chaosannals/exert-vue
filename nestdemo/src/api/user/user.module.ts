@@ -5,9 +5,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { UserSubscriber } from './user.subscriber';
 import { Photo } from './photo.entity';
+import { Token } from './token.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Photo])],
+  imports: [
+    TypeOrmModule.forFeature([User, Photo]),
+    TypeOrmModule.forFeature([Token], 'sqlite-1'),
+  ],
   exports: [TypeOrmModule],
   controllers: [UserController],
   providers: [UserService, UserSubscriber],
