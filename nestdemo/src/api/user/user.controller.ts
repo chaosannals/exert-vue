@@ -35,8 +35,8 @@ export class UserController {
         const photos = [];
         for (let i = 0; i < count; ++i) {
             const photo = new Photo();
-            const userId = random(0, userIds.length - 1, false);
-            photo.user = userMap[userId]; // todo 关联不上 ，userId NULL
+            const userId = userIds[random(0, userIds.length - 1, false)];
+            photo.user = userMap.get(userId); 
             photo.createAt = format(faker.date.anytime(), 'yyyy-MM-dd HH:ii:ss');
             photo.url = faker.internet.url();
             photos.push(photo);
