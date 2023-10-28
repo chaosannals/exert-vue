@@ -19,6 +19,7 @@ export class UserController {
             const user = new User();
             user.firstName = faker.person.firstName();
             user.lastName = faker.person.lastName();
+            user.birthdate = format(faker.date.anytime(), 'yyyy-MM-dd HH:ii:ss');
             users.push(user);
         }
         await this.userService.createMany(users);
@@ -37,7 +38,6 @@ export class UserController {
             const photo = new Photo();
             const userId = userIds[random(0, userIds.length - 1, false)];
             photo.user = userMap.get(userId); 
-            photo.createAt = format(faker.date.anytime(), 'yyyy-MM-dd HH:ii:ss');
             photo.url = faker.internet.url();
             photos.push(photo);
         }

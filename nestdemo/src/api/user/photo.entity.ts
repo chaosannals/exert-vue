@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn } from 'typeorm';
 import { User } from './user.entity';
 
 @Entity()
@@ -9,7 +9,7 @@ export class Photo {
     @Column()
     url: string;
 
-    @Column({ type: 'datetime', nullable: true, })
+    @CreateDateColumn()
     createAt: string;
 
     @ManyToOne(type => User, user => user.photos)
