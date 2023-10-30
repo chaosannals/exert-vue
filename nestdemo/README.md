@@ -49,6 +49,8 @@ curl -X POST "http://localhost:3001/auth/login" -d "{\"username\": \"admin\", \"
 curl "http://localhost:3001/profile" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTY5ODI5ODMyMywiZXhwIjoxNjk4Mjk4MzgzfQ.2QpJ0P8YDdhA9pUFTTB_mgDjVzbOhmlq73f09XGqR_U"
 ```
 
+注：  tauridemo 项目是前端示例。
+
 ## GRPC
 
 示例需要手动写 interfaces 里面 message 和 controller 里 Service 的类型声明，很不方便。不如谷歌的 grpc 自动生成声明.d.ts 文件，自动生成可以减少出错，同时维护 2 个对应结构也很麻烦。
