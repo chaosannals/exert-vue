@@ -5,6 +5,15 @@
 </template>
 
 <script setup lang="ts">
+import { onBeforeMount } from 'vue';
+import { useUserStore } from '../stores/UserStore';
+
+const user = useUserStore();
+
+onBeforeMount(() => {
+    console.log('user', user);
+});
+
 </script>
 
 <style scoped lang="scss">

@@ -12,7 +12,7 @@ import { Token } from './token.entity';
     TypeOrmModule.forFeature([User, Photo]),
     TypeOrmModule.forFeature([Token], 'sqlite-1'),
   ],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, UserService],
   controllers: [UserController],
   providers: [UserService, UserSubscriber],
 })

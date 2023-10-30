@@ -2,7 +2,8 @@ import {
     createRouter,
     createWebHistory,
 } from "vue-router";
-import { kebabCase } from 'lodash';
+import { isEmpty, kebabCase } from 'lodash';
+import { useUserStore } from "./stores/UserStore";
 
 function routePages() {
     const result = [
@@ -36,6 +37,13 @@ export const routes = routePages();
 const router = createRouter({
     history: createWebHistory(),
     routes: routes,
+});
+
+router.beforeEach(async (to, from) => {
+    const user = useUserStore();
+    if (to.path != '/login' && isEmpty(user.token)) {
+        return { path: '/login' }
+    }
 });
 
 export default router;

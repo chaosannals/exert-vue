@@ -39,9 +39,11 @@ export class AppController {
     return 'This action adds a new cat';
   }
 
+  @Public()
   @UseGuards(LocalAuthGuard) // local 要和 local.strategy.ts 对应
   @Post('auth/login')
   async login(@Request() req) {
+    console.log('post auth/login');
     return this.authService.login(req.user);
   }
 

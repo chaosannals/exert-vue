@@ -6,14 +6,9 @@
 
 <script setup lang="ts">
 import { onBeforeMount } from 'vue';
-import { setTimeoutAsync } from '../utils/time';
-import { useRouter } from 'vue-router';
 
-const router = useRouter();
+onBeforeMount(async () => {
 
-onBeforeMount(async() => {
-    await setTimeoutAsync(1000);
-    router.push('index');
 });
 
 </script>
