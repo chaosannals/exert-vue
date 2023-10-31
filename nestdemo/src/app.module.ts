@@ -13,6 +13,7 @@ import { snakeCase } from 'lodash';
 import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-store';
 import { caching } from 'cache-manager';
+import { Ssh2Module } from './api/ssh2/ssh2.module';
 
 class MySnakeNamingStrategy extends SnakeNamingStrategy {
   private prefix: string;
@@ -80,6 +81,7 @@ const defaultOptions: TypeOrmModuleOptions = {
         });
       },
     }),
+    Ssh2Module,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -21,7 +21,8 @@
         "all": true,
         "request": true,
         "scope": [
-          "http://127.0.0.1:3001/*"
+          "http://*/*",
+          "https://*/*"
         ]
       }
     },
