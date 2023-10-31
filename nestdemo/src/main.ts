@@ -22,7 +22,8 @@ async function bootstrap() {
   // 复合写法，可以 多微服务 和 接口
   const app = await NestFactory.create(AppModule, { abortOnError: false });
   app.connectMicroservice<MicroserviceOptions>(grpcClientOptions);
-  app.useGlobalGuards(new MyAuthGuard());
+  const myauth = app.get(MyAuthGuard);
+  app.useGlobalGuards(myauth);
 
   await app.startAllMicroservices();
   await app.listen(3001);

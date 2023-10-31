@@ -1,10 +1,12 @@
-import { Controller, Request, Get, Post, UseGuards, SetMetadata, Next, Redirect, Query, Param, HttpCode, Header } from '@nestjs/common';
+import { Controller, Request, Get, Post, UseGuards, SetMetadata, Next, Redirect, Query, Param, HttpCode, Header, Inject } from '@nestjs/common';
 import { AppService } from './app.service';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import { MyRolesGuard, Roles } from './my-roles.guard';
 import { Public } from './auth/jwt-auth.guard';
+import { CACHE_MANAGER, CacheKey, CacheTTL } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 /**
  *  路由 action 参数：
@@ -23,7 +25,8 @@ import { Public } from './auth/jwt-auth.guard';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache
   ) { }
 
   @Get()
@@ -75,9 +78,21 @@ export class AppController {
     }
   }
 
-  @Get(':id')
+  // @Get(':id') // 路由定义有先后，此处如果设置这样，会导致之后的路由全部被 :id 截获。
+  @Get('/aaacat/:id')
   findOne(@Param() params): string {
     console.log(params.id);
     return `This action returns a #${params.id} cat`;
+  }
+
+  @Get('cache')
+  @Public()
+  @CacheKey('custom_key') // 【可选】 缓存键
+  @CacheTTL(20) //【可选】  过期时间 20s
+  async getCache(): Promise<string> {
+    const k = 'cache-string';
+    const t = await this.cacheManager.get<number>(k) ?? 1;
+    await this.cacheManager.set(k, t + 1);
+    return `number: ${t}`;
   }
 }

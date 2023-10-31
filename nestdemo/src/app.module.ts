@@ -10,6 +10,7 @@ import { DataSource } from 'typeorm';
 import { UserModule } from './api/user/user.module';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { snakeCase } from 'lodash';
+import { CacheModule } from '@nestjs/cache-manager';
 
 class MySnakeNamingStrategy extends SnakeNamingStrategy {
   private prefix: string;
@@ -62,6 +63,9 @@ const defaultOptions: TypeOrmModuleOptions = {
       namingStrategy: new MySnakeNamingStrategy("nd_"),
     }),
     UserModule,
+    CacheModule.register({
+      isGlobal: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

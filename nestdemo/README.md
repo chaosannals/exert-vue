@@ -62,4 +62,8 @@ ts 的声明 interface HeroService 如果和 proto 的声明不一致（只是�
 ```bash
 #  安装 Mysql 密码 123456 默认创建 demo 库
 docker run -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=demo -p 3306:3306  -m 4000M --restart=always --name=mysql -d mysql:8.0.32
+
+
+# 安装 Redis
+docker run -p 6379:6379  -m 1000M --restart=always --name=redis-server -d redis:7.2.2-alpine
 ```

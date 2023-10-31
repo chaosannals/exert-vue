@@ -1,5 +1,7 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
+import { IS_PUBLIC_KEY } from './auth/jwt-auth.guard';
+import { Reflector } from '@nestjs/core';
 
 /**
  * 本示例 自定义一个 守卫
@@ -19,6 +21,10 @@ import { Observable } from 'rxjs';
  */
 @Injectable()
 export class MyAuthGuard implements CanActivate {
+    constructor(private reflector: Reflector) {
+
+    }
+
     /**
      * 
      * @param context 
@@ -28,6 +34,11 @@ export class MyAuthGuard implements CanActivate {
         context: ExecutionContext,
     ): boolean | Promise<boolean> | Observable<boolean> {
         const request = context.switchToHttp().getRequest();
+        const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+            context.getHandler(),
+            context.getClass(),
+        ]);
+        console.log('MyAuthGuard.canActivate', isPublic);
         // return validateRequest(request);
         return true;
     }
