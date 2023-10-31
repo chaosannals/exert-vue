@@ -11,6 +11,8 @@ import { UserModule } from './api/user/user.module';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { snakeCase } from 'lodash';
 import { CacheModule } from '@nestjs/cache-manager';
+import { redisStore } from 'cache-manager-redis-store';
+import { caching } from 'cache-manager';
 
 class MySnakeNamingStrategy extends SnakeNamingStrategy {
   private prefix: string;
@@ -63,13 +65,25 @@ const defaultOptions: TypeOrmModuleOptions = {
       namingStrategy: new MySnakeNamingStrategy("nd_"),
     }),
     UserModule,
-    CacheModule.register({
+    CacheModule.registerAsync({ // 使用 redis 必须是 cache-manager 4.x 版本，最新的 5.x 没有适配 nestjs .
       isGlobal: true,
+      useFactory: async () => {
+        return caching({
+          store: await redisStore({
+            socket: {
+              host: 'localhost',
+              port: 6379,
+            },
+            database: 0,
+            store: 'none', // 
+          }),
+        });
+      },
     }),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  constructor(private dataSource: DataSource) {}
+  constructor(private dataSource: DataSource) { }
 }
