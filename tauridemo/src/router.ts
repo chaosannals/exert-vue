@@ -9,7 +9,7 @@ function routePages() {
     const result = [
         {
             path: '/',
-            component: () => import("./pages/EnterPage.vue"),
+            component: () => import("./pages/IndexPage.vue"),
         }
     ];
     const pages = import.meta.glob('./pages/**/*Page.vue');
