@@ -16,6 +16,7 @@
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 // b1 和 b2 不是树节点关系不会触发。
+// 解决方案：Element.getBoundingClientRect() 算出后自己计算交集
 const b1 = ref();
 const b2 = ref();
 
