@@ -24,6 +24,12 @@
             </div>
             <div class="ssh-row">
                 <button type="submit">执行</button>
+                <button type="button" @click="onAdd">添加</button>
+                <button type="button" @click="onDel">删除</button>
+            </div>
+            <div v-for="(_, i) in store.config.commands" class="ssh-textarea">
+                <label>命令 {{ i }}</label>
+                <textarea v-model="store.config.commands![i]"></textarea>
             </div>
             <div class="ssh-textarea">
                 <label>stdout</label>
@@ -59,6 +65,14 @@ const onLoadPriKey = async (e: Event) => {
     store.config.privateKey = Utf8.stringify(WordArray.create(buffer));
 };
 
+const onAdd = () => {
+    store.config.commands?.push("");
+};
+
+const onDel = () => {
+    store.config.commands?.pop();
+};
+
 const onSubmit = async () => {
     const response = await apiPost<{
         stdout: string;
@@ -87,7 +101,7 @@ const onSubmit = async () => {
 
 .ssh-row {
     button {
-        width: 100%;
+        flex-grow: 1;
     }
 }
 

@@ -7,6 +7,7 @@ export interface Ssh2ConfigInfo {
     username: string;
     privateKey?: string;
     command?: string;
+    commands?: string[];
 }
 
 export const useSsh2Store = defineStore('ssh2', () => {
@@ -15,6 +16,7 @@ export const useSsh2Store = defineStore('ssh2', () => {
         port: '22',
         username: 'root',
         command: 'pwd',
+        commands: [],
     } as Ssh2ConfigInfo);
     return {
         config

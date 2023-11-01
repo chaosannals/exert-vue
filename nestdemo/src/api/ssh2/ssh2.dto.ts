@@ -3,5 +3,6 @@ export class Ssh2DoSomeDto {
     port: number;
     username: string;
     privateKey: string;
-    command: string;
+    command?: string;
+    commands?: string[];
 }
