@@ -85,7 +85,7 @@ export class Ssh2Service {
         });
     }
 
-    async openShell(config: ConnectConfig) : Promise<Ssh2Shell> {
+    async openShell(config: ConnectConfig): Promise<Ssh2Shell> {
         const client = await this.connect(config);
         return new Promise((resolve, reject) => {
             console.log('openShell', 'start');
@@ -103,14 +103,26 @@ export class Ssh2Service {
                             client.end();
                             resolve2(null);
                         }).on('data', (data) => {
-                            console.log('openShell', 'stdout',  data.toString('utf8'));
+                            console.log('openShell', 'stdout', data.toString('utf8'));
                             result.stdout += data.toString('utf8');
                         }).stderr.on('data', (data) => {
-                            console.log('openShell', 'stderr',  data.toString('utf8'));
+                            console.log('openShell', 'stderr', data.toString('utf8'));
                             result.stderr += data.toString('utf8');
                         });
                         resolve(result);
                     });
+                }
+            });
+        });
+    }
+
+    async startShell(client: Client): Promise<ClientChannel> {
+        return new Promise((resolve, reject) => {
+            client.shell((e, stream) => {
+                if (e) {
+                    reject(e);
+                } else {
+                    resolve(stream);
                 }
             });
         });

@@ -14,6 +14,13 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-store';
 import { caching } from 'cache-manager';
 import { Ssh2Module } from './api/ssh2/ssh2.module';
+// import { MulterModule } from '@nestjs/platform-express';
+// import { diskStorage } from 'multer';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { ServerResponse } from 'http';
+import { Stats } from 'fs';
+import { ConfigModule } from '@nestjs/config';
 
 class MySnakeNamingStrategy extends SnakeNamingStrategy {
   private prefix: string;
@@ -46,6 +53,37 @@ const defaultOptions: TypeOrmModuleOptions = {
 @Dependencies(DataSource)
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: [
+        // 越前面优先级越高。
+        '.env', // 高
+        '.dev.env',  // 低
+      ],
+    }),
+    // MulterModule.register({
+    //   storage: diskStorage({
+    //     destination: join(__dirname, '../public'),
+    //     filename: (_, filename, callback) => {
+    //       return callback(null, filename);
+    //     }
+    //   }),
+    // }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+      serveRoot: '/',
+      serveStaticOptions: { // 默认单页面模式，有 index.html 就会把 404 重写。
+        setHeaders(res: ServerResponse, path: string, stat: Stats) {
+          if (path.endsWith('.css')) {
+            // console.log(res, path, stat);
+            // res.setHeader('Content-Type', 'text/css');
+            // return {
+            //   'Content-Type': 'text/css',
+            // };
+          }
+        }
+      }
+    }),
     HeroModule,
     AnimalModule,
     AuthModule,

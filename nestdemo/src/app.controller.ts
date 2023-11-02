@@ -36,6 +36,15 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Get("env")
+  @Public()
+  getEnv(): any {
+    return {
+      v: process.env.CUSTOM_V,
+      v2: process.env.CUSTOM_2,
+    };
+  }
+
   @Post()
   @HttpCode(204) // Not Content
   create() {
