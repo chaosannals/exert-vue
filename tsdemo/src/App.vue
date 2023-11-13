@@ -1,6 +1,10 @@
 <template>
   <div>
-    <router-view></router-view>
+    <RouterView v-slot="{ Component }">
+      <KeepAlive>
+        <component :is="Component" />
+      </KeepAlive>
+    </RouterView>
     <div>{{ store.version }}</div>
   </div>
 </template>
