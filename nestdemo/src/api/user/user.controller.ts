@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { User } from './user.entity';
 import { faker } from '@faker-js/faker';
 import { UserService } from './user.service';
@@ -9,11 +9,20 @@ import { format } from 'date-fns';
 
 @Controller('user')
 export class UserController {
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService) { }
+
+    @Public()
+    @Post("find")
+    async find(
+        @Param("skip") skip: number = 0,
+        @Param("take") take: number = 100
+    ): Promise<User[]> {
+        return await this.userService.findAll(skip, take);
+    }
 
     @Public()
     @Get("add_random")
-    async addRandom(@Query("count") count: number=10) {
+    async addRandom(@Query("count") count: number = 10) {
         const users = [];
         for (let i = 0; i < count; ++i) {
             const user = new User();
@@ -28,7 +37,7 @@ export class UserController {
 
     @Public()
     @Get("add_photos")
-    async addPhotos(@Query("count") count: number=100, @Query("user_count") userCount: number=10) {
+    async addPhotos(@Query("count") count: number = 100, @Query("user_count") userCount: number = 10) {
         const userAllIds = await this.userService.getAllIds();
         const userIds = shuffle(userAllIds).slice(0, Math.min(userCount, userAllIds.length));
         const users = await this.userService.findByIds(userIds);
@@ -37,7 +46,7 @@ export class UserController {
         for (let i = 0; i < count; ++i) {
             const photo = new Photo();
             const userId = userIds[random(0, userIds.length - 1, false)];
-            photo.user = Promise.resolve(userMap.get(userId)); 
+            photo.user = Promise.resolve(userMap.get(userId));
             photo.url = faker.internet.url();
             photos.push(photo);
         }

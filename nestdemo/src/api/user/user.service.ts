@@ -21,8 +21,11 @@ export class UserService {
         });
     }
 
-    findAll(): Promise<User[]> {
-        return this.usersRepository.find();
+    findAll(skip?: number, take?: number): Promise<User[]> {
+        return this.usersRepository.find({
+            skip: skip,
+            take: take,
+        });
     }
 
     findOne(id: string): Promise<User> {

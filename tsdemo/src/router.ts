@@ -2,7 +2,8 @@ import {
     createRouter,
     createWebHistory,
 } from "vue-router";
-import { kebabCase } from 'lodash';
+import { isEmpty, kebabCase } from 'lodash';
+import { useCommonStore } from "./stores/common";
 
 function routePages() {
     const result = [
@@ -36,6 +37,13 @@ export const routes = routePages();
 const router = createRouter({
     history: createWebHistory(),
     routes: routes,
+});
+
+router.beforeEach(async (to) => {
+    const common = useCommonStore();
+    if (to.path != '/login' && isEmpty(common.token)) {
+        return { path: '/login' };
+    }
 });
 
 export default router;
