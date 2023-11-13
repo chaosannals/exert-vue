@@ -16,7 +16,7 @@ import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
     AnimalService,
     CatService,
 
-    //该模块 全局验证
+    //该模块 全局验证 (这里会导致全局都被 Jwt 验证 APP_GUARD)
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
