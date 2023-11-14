@@ -4,6 +4,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { grpcClientOptions } from './grpc-client.options';
 import { join } from 'path';
 import { MyAuthGuard } from './my-auth.guard';
+import * as session from 'express-session';
 
 async function bootstrap() {
   // 这种写法单纯 微服务
@@ -24,6 +25,13 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>(grpcClientOptions);
   const myauth = app.get(MyAuthGuard);
   app.useGlobalGuards(myauth);
+  app.use(
+    session({
+      secret: 'my-secret',
+      resave: false,
+      saveUninitialized: false,
+    })
+  );
 
   await app.startAllMicroservices();
   await app.listen(3001);

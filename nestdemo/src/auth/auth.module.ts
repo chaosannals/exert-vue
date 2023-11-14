@@ -9,6 +9,8 @@ import { jwtConstants } from './constants';
 import { UserModule } from 'src/api/user/user.module';
 import { MyAuthGuard } from 'src/my-auth.guard';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Permission } from './permission.entity';
 
 @Module({
   imports: [
@@ -18,6 +20,9 @@ import { JwtAuthGuard } from './jwt-auth.guard';
       signOptions: { expiresIn: '600s' },
     }),
     UserModule,
+    TypeOrmModule.forFeature([
+      Permission,
+    ])
   ],
   providers: [AuthService, UserService, LocalStrategy, JwtStrategy, MyAuthGuard, JwtAuthGuard],
   exports: [UserService, AuthService],

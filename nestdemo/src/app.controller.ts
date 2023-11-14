@@ -1,4 +1,4 @@
-import { Controller, Request, Get, Post, UseGuards, SetMetadata, Next, Redirect, Query, Param, HttpCode, Header, Inject } from '@nestjs/common';
+import { Controller, Request, Get, Post, UseGuards, SetMetadata, Next, Redirect, Query, Param, HttpCode, Header, Inject, Req, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
@@ -103,5 +103,15 @@ export class AppController {
     const t = await this.cacheManager.get<number>(k) ?? 1;
     await this.cacheManager.set(k, t + 1);
     return `number: ${t}`;
+  }
+
+  @Get('captcha')
+  @Public()
+  captcha(@Req() req, @Res() res) {
+    const captcha = this.appService.makeCaptcha();
+    console.log('captcha', captcha.text);
+    req.session.code = captcha.text;
+    res.type('image/svg+xml');
+    res.send(captcha.data);
   }
 }
