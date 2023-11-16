@@ -28,6 +28,10 @@ const MENU = [
                 title: 'V2 虚表示例',
                 index: '/demo/table-v-2',
             },
+            {
+                title: 'VXE 虚表示例',
+                index: '/demo/vxe-table',
+            },
         ],
     },
     {

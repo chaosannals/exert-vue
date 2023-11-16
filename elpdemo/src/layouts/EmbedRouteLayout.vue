@@ -47,6 +47,7 @@
     .embed-route-sheet {
         display: flex;
         flex-direction: column;
+        overflow: hidden;
         flex-grow: 1;
         border-radius: var(--content-radius) 0 0 var(--content-radius);
         background-color: #FFFFFF;
@@ -55,6 +56,7 @@
     .embed-route-content {
         flex-grow: 1;
         margin: 0 1em;
+        overflow: hidden;
     }
 }
 </style>
