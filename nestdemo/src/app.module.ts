@@ -58,7 +58,7 @@ const defaultOptions: TypeOrmModuleOptions = {
       envFilePath: [
         // 越前面优先级越高。
         '.env', // 高
-        '.dev.env',  // 低
+        process.env.RUN_MODE == 'prod' ? '.dev.prod' : '.dev.env',  // 低
       ],
     }),
     // MulterModule.register({
