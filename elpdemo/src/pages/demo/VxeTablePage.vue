@@ -1,14 +1,20 @@
 <template>
     <PageLayout class="demo-vxe-table-page">
         <ElAutoResizer style="overflow: hidden;">
-            <template #default="{ height }">
-                <VxeTable class="table" :column-config="{resizable: true}" :height="height" :data="data.rows" border show-overflow>
+            <template #default="{ height, width }">
+                <VxeTable class="table" :column-config="{ resizable: true }" :height="height" :width="width" :data="data.rows"
+                    border show-overflow @cell-click="onClickCell">
                     <VxeColumn type="seq" title="#" width="60"></VxeColumn>
                     <VxeColumn type="checkbox" width="60"></VxeColumn>
                     <VxeColumn field="name" title="姓名"></VxeColumn>
                     <VxeColumn field="age" title="年龄"></VxeColumn>
+                    <VxeColumn title="头像">
+                        <template #default="{ row }">
+                            <img alt="avatar" :src="row.avatar" />
+                        </template>
+                    </VxeColumn>
                     <VxeColumn field="birthdate" title="生日">
-                        <template #default="{row}">
+                        <template #default="{ row }">
                             <span>{{ format(row.birthdate, 'yyyy-MM-dd') }}</span>
                         </template>
                     </VxeColumn>
@@ -29,12 +35,14 @@ const faker = new Faker({
 });
 
 const data = reactive({
+    row: {},
     rows: [],
 } as {
+    row: any,
     rows: any[],
 });
 
-const initRows = ()  => {
+const initRows = () => {
     for (let i = 0; i < 100; ++i) {
         const row = {
             name: faker.person.fullName(),
@@ -48,6 +56,10 @@ const initRows = ()  => {
 }
 
 initRows();
+
+const onClickCell = (cell: { row: any }) => {
+    data.row = cell.row;
+};
 
 onBeforeMount(() => {
 
