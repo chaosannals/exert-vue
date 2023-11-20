@@ -13,7 +13,7 @@ import GIF from 'gif.js';
 // import gifWorker from 'gif.js/dist/gif.worker?raw';
 
 // 直接 vite 提供 URL，效率更高，同样的问题 TS 缺少类型声明，不是 string 。
-//@ts-ignore
+// vite-env.d.ts 定义了声明。
 import gifWorkerUrl from 'gif.js/dist/gif.worker?url';
 import { ref } from 'vue';
 
