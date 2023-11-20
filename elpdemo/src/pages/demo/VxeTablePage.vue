@@ -8,9 +8,9 @@
                     <VxeColumn type="checkbox" width="60"></VxeColumn>
                     <VxeColumn field="name" title="姓名"></VxeColumn>
                     <VxeColumn field="age" title="年龄"></VxeColumn>
-                    <VxeColumn title="头像">
+                    <VxeColumn title="头像" width="80" align="center">
                         <template #default="{ row }">
-                            <img alt="avatar" :src="row.avatar" />
+                            <img class="row-avatar" alt="avatar" :src="row.avatar" />
                         </template>
                     </VxeColumn>
                     <VxeColumn field="birthdate" title="生日">
@@ -71,5 +71,9 @@ onBeforeMount(() => {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+
+    .row-avatar {
+        height: 40px;
+    }
 }
 </style>
