@@ -12,6 +12,7 @@
     "@faker-js/faker": "^8.3.1",
     "date-fns": "^2.30.0",
     "element-plus": "^2.4.2",
+    "gif.js": "^0.2.0",
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "pinia": "^2.1.7",
@@ -22,6 +23,7 @@
     "xe-utils": "^3.5.14"
   },
   "devDependencies": {
+    "@types/gif.js": "^0.2.5",
     "@types/lodash": "^4.14.201",
     "@types/node": "^20.9.0",
     "@vitejs/plugin-vue": "^4.2.3",

@@ -35,14 +35,24 @@ const MENU = [
         ],
     },
     {
+        title: '其他示例',
+        index: '/other/list',
+        children: [
+            {
+                title: 'gif.js 示例',
+                index: '/other/gif-js-demo',
+            },
+        ],
+    },
+    {
         title: '特殊页面',
         index: '/',
         children: [
             {
                 title: '登录页',
                 index: '/login',
-            }
-        ]
+            },
+        ],
     },
 ];
 
