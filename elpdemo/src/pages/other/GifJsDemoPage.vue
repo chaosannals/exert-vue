@@ -65,6 +65,7 @@ const onClickGenerate = async () => {
         const image = loadImage(`/images/gif-${i}.png`);
         tasks.push(image);
     }
+    
     // 这个库是早期库，没有等待图片加载完成，所以需要自己做图片加载完成的操作。不然会是黑的。
     const images = await Promise.all(tasks);
     gifTarget.value = await generateGif(images);

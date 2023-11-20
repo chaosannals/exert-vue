@@ -42,6 +42,10 @@ const MENU = [
                 title: 'gif.js 示例',
                 index: '/other/gif-js-demo',
             },
+            {
+                title: 'image-in-browser 示例',
+                index: '/other/image-in-browser-demo',
+            },
         ],
     },
     {
