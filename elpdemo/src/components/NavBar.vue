@@ -83,5 +83,6 @@ const onClose = (index: string) => {
     flex-direction: column;
     width: 10em;
     margin: 2em 0;
+    overflow: hidden;
 }
 </style>

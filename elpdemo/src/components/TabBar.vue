@@ -26,6 +26,14 @@ const onRemove = (name: TabPaneName) => {
     const i = app.tabbar.findIndex(t => t.fullPath == name);
     if (i > -1) {
         app.tabbar.splice(i, 1);
+        if (route.fullPath == name) {
+            const front = app.tabbar[i - 1];
+            if (front) {
+                router.push(front.fullPath);
+            } else {
+                router.push('/');
+            }
+        }
     }
 };
 
