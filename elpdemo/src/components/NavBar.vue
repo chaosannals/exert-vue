@@ -49,6 +49,16 @@ const MENU = [
         ],
     },
     {
+        title: '玩意示例',
+        index: '/toy/list',
+        children: [
+            {
+                title: '倒计时示例',
+                index: '/toy/countdown',
+            },
+        ],
+    },
+    {
         title: '特殊页面',
         index: '/',
         children: [
