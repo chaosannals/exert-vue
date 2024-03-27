@@ -1,6 +1,6 @@
 <template>
     <div class="index-page">
-        <div v-for="link in links" @click="onClickLink(link)">
+        <div v-for="link in links" class="link" @click="onClickLink(link)">
             <span>{{ link }}</span>
         </div>
         <div v-for="f in data.files">
@@ -27,3 +27,9 @@ const onClickLink = (link: string) => {
 };
 
 </script>
+
+<style lang="scss" scoped>
+.link {
+    cursor: pointer;
+}
+</style>
