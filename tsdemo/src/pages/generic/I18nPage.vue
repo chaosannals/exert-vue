@@ -7,13 +7,13 @@
 <script lang="ts" setup>
 
 class MyI18nItem {
-    id: number;
-    name: string;
-    name_en: string;
-    name_jp: string;
-    content: string;
-    content_en: string;
-    content_jp: string;
+    id?: number;
+    name?: string;
+    name_en?: string;
+    name_jp?: string;
+    content?: string;
+    content_en?: string;
+    content_jp?: string;
 }
 
 type MyI18nLang = "" | "en" | "jp";

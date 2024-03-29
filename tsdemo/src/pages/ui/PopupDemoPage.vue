@@ -13,18 +13,19 @@ import {
     offset,
     flip,
     shift,
+    type Placement,
 } from '@floating-ui/vue';
 
 const reference = ref();
 const floating = ref();
-const placement = ref('top');
+const placement = ref<Placement>('top');
 const { floatingStyles, update: updateFloating } = useFloating(reference, floating, {
     transform: true,
     placement: placement,
     middleware: [offset(10), flip(), shift()],
 });
 
-const placements = ['top', 'left', 'right', 'bottom'];
+const placements: Placement[] = ['top', 'left', 'right', 'bottom'];
 
 const onClick = () => {
     const index = placements.indexOf(placement.value);

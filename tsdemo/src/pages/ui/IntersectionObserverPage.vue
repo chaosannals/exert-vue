@@ -49,7 +49,7 @@ const onMouseMove = (e: MouseEvent) => {
     }
 }
 
-const onMouseUp = (e: MouseEvent) => {
+const onMouseUp = (_e: MouseEvent) => {
     data.dragTarget = null;
 }
 
