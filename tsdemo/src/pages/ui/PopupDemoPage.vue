@@ -3,7 +3,7 @@
     <div ref="floating" :style="floatingStyles">Tooltip</div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 /**
  * floating-ui 是原本 popper.js 而来。
  */
