@@ -8,6 +8,11 @@ import router from './router';
 import 'highlight.js/styles/github.css';
 import hljs, { HLJSApi } from 'highlight.js';
 
+import { registerAllModules } from 'handsontable/registry';
+import 'handsontable/dist/handsontable.full.css';
+
+registerAllModules();
+
 hljs.registerLanguage('mylang', (api: HLJSApi) => {
     console.log(api.listLanguages());
     return {
